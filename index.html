@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Colombia Reals</title>
+
+  <!-- Fuente personalizada -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="highlight">Santiago Ramirez
+
+  </div>
+
+  <!-- Pantalla de bienvenida -->
+  <div class="profile-card" id="introCard">
+    <h2>Bienvenido</h2>
+    <p>Toca para empezar</p>
+    <button onclick="enterSite()" style="margin-top: 10px; padding: 10px 20px; background-color: #00ffcc; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+      Toca para empezar
+    </button>
+  </div>
+
+  <!-- Contenido principal oculto -->
+  <div class="profile-card" id="mainContent" style="display: none;">
+    <img src="yo.png" alt="Foto de perfil" class="profile-img">
+    <h1>Colombia Reals</h1>
+    <p>👑 EXP Staff en MTA | FiveM | SAMP</p>
+    <p>🎓 Ing. de Sistemas | Dev Programador</p>
+    <p>💼 Scripts y sistemas a la venta</p>
+    <p>🖥️ Creación y configuración de servidores Discord</p>
+
+    <div class="social-icons">
+      <a href="https://discord.com/users/1367632803163934773" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://www.tiktok.com/@santiago______123" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+
+  <script>
+    function enterSite() {
+      document.getElementById('introCard').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
