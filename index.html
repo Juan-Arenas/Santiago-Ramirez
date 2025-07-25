@@ -1,40 +1,132 @@
-<!DOCTYPE html>
+><!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Colombia Reals</title>
+  <title>Santiago Ramírez</title>
 
-  <!-- Fuente personalizada -->
+  <!-- Fuente personalizada (Orbitron) -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 
   <!-- Estilos -->
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: #0f0f0f;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #ffffff;
+      position: relative;
+    }
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .highlight {
+      font-size: 2.5rem;
+      color: #00ffcc;
+      font-weight: bold;
+      text-shadow: 0 0 15px #00ffcc, 0 0 30px #00ffcc;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffcc;
+      }
+      to {
+        text-shadow: 0 0 25px #00ffcc, 0 0 50px #00ffcc;
+      }
+    }
+    .tagline {
+      font-size: 1.1rem;
+      color: #00ffcc;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      font-style: italic;
+      text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #00ffcc;
+      font-size: 1rem;
+      font-family: monospace;
+    }
+    .music-toggle {
+      background-color: #00ffcc;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 0 10px #00ffcc;
+      margin: 15px 0;
+    }
+    .music-toggle:hover {
+      background-color: #00e6b8;
+      transform: scale(1.05);
+    }
+    .social-icons a {
+      margin: 0 10px;
+      color: #fff;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+    .social-icons a:hover {
+      transform: scale(1.3);
+      text-shadow: 0 0 10px #00ffcc;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="highlight">Santiago Ramirez
+  <div id="particles-js"></div>
+  <audio id="bgMusic" autoplay loop muted style="display: none;">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
 
-  </div>
+  <div class="clock" id="clock"></div>
+
+  <div class="highlight">Colombia Reals 🌟</div>
 
   <!-- Pantalla de bienvenida -->
   <div class="profile-card" id="introCard">
-    <h2>Bienvenido</h2>
+    <h2>👋 Bienvenido</h2>
     <p>Toca para empezar</p>
-    <button onclick="enterSite()" style="margin-top: 10px; padding: 10px 20px; background-color: #00ffcc; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
-      Toca para empezar
-    </button>
+    <button onclick="enterSite()" style="margin-top: 10px; padding: 10px 20px; background-color: #00ffcc; color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Toca para empezar</button>
   </div>
 
   <!-- Contenido principal oculto -->
   <div class="profile-card" id="mainContent" style="display: none;">
     <img src="yo.png" alt="Foto de perfil" class="profile-img">
-    <h1>Colombia Reals</h1>
+    <h1>Santiago Ramírez ✨</h1>
+    <p class="tagline">"Los servidores hablan por mí. Yo solo los hago perfectos."</p>
     <p>👑 EXP Staff en MTA | FiveM | SAMP</p>
     <p>🎓 Ing. de Sistemas | Dev Programador</p>
     <p>💼 Scripts y sistemas a la venta</p>
     <p>🖥️ Creación y configuración de servidores Discord</p>
+
+    <button class="music-toggle" onclick="toggleMusic()">🎵 Pausar Música</button>
 
     <div class="social-icons">
       <a href="https://discord.com/users/1367632803163934773" target="_blank"><i class="fab fa-discord"></i></a>
@@ -42,10 +134,55 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {"value": 80, "density": {"enable": true, "value_area": 800}},
+        "color": {"value": "#00ffcc"},
+        "shape": {"type": "circle"},
+        "opacity": {"value": 0.5},
+        "size": {"value": 3},
+        "line_linked": {"enable": true, "distance": 150, "color": "#00ffcc", "opacity": 0.4, "width": 1},
+        "move": {"enable": true, "speed": 3}
+      }
+    });
+
+    const music = document.getElementById('bgMusic');
+    const clockEl = document.getElementById('clock');
+    const toggleBtn = document.querySelector('.music-toggle');
+
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      clockEl.textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    window.addEventListener('DOMContentLoaded', () => {
+      music.play().catch(() => {
+        console.log('Autoplay bloqueado');
+      });
+    });
+
     function enterSite() {
       document.getElementById('introCard').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
+      music.muted = false;
+      music.play().catch((e) => console.log(e));
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        toggleBtn.textContent = '🎵 Pausar Música';
+      } else {
+        music.pause();
+        toggleBtn.textContent = '🔇 Reanudar Música';
+      }
     }
   </script>
 </body>
